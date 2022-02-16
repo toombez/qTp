@@ -1,0 +1,30 @@
+{
+  "name": "terminalgame",
+  "version": "0.1.0",
+  "description": "game in terminal",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/toombez/terminalGame.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/toombez/terminalGame/issues"
+  },
+  "homepage": "https://github.com/toombez/terminalGame#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.15",
+    "ts-node": "^10.5.0",
+    "typescript": "^4.5.5"
+  },
+  "dependencies": {
+    "chalk": "^5.0.0",
+    "process": "^0.11.10",
+    "readline": "^1.3.0"
+  }
+}
