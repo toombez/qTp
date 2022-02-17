@@ -10,9 +10,21 @@ export default class ControlComponent extends AbstractComponent {
         this.activeComponent = component;
     }
 
+    public static globalControls = new Map<string, ExecuteControl>();
+    public static isGlobal(control: string): boolean {
+        return this.globalControls.has(control);
+    }
+
     public controls = new Map<string, ExecuteControl>();
-    public addControl(sequince: string, execute: ExecuteControl): this {
-        this.controls.set(sequince, execute);
+    public addControl(sequence: string, execute: ExecuteControl, isGlobal: boolean = false): this {
+        if (ControlComponent.globalControls.get(sequence))
+        throw new ReferenceError('This sequience already is global control');
+
+        if (isGlobal) 
+        ControlComponent.globalControls.set(sequence, execute)
+        else 
+        this.controls.set(sequence, execute);
+
         return this;
     }
 }

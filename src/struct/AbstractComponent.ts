@@ -28,7 +28,7 @@ export default abstract class AbstractComponent {
         const yComponentOverflow: boolean = point.y + component.Height > this.height;
 
         if (xComponentOverflow || yComponentOverflow) 
-        throw RangeError('Child component bigger than parent');
+        throw new RangeError('Child component bigger than parent');
 
         this.components.set(point, component);
         return this;
