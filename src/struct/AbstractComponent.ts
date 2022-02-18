@@ -1,6 +1,8 @@
 export default abstract class AbstractComponent {
-    constructor(private width: number = 1, 
-                private height: number = 1) {}
+    constructor(
+        private width: number = 1,         
+        private height: number = 1
+    ) {}
 
     public get Height() {
         return this.height;

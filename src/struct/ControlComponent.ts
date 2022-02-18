@@ -16,7 +16,11 @@ export default class ControlComponent extends AbstractComponent {
     }
 
     public controls = new Map<string, ExecuteControl>();
-    public addControl(sequence: string, execute: ExecuteControl, isGlobal: boolean = false): this {
+    public addControl(
+        sequence: string, 
+        execute: ExecuteControl, 
+        isGlobal: boolean = false
+    ): this {
         if (ControlComponent.globalControls.get(sequence))
         throw new ReferenceError('This sequience already is global control');
 
