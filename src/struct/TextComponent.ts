@@ -2,10 +2,8 @@ import stripAnsi from "strip-ansi";
 import AbstractComponent from "./AbstractComponent";
 
 export default class TextComponent extends AbstractComponent {
-    constructor(private text: string = '', width?: number) {
-        super();
-        this.Width = width? width: this.text.length;
-        super.Height = width? Math.ceil(this.text.length / width): 1;
+    constructor(private text: string = '') {
+        super(text.length, 1);
     }
 
     public get Width() {
@@ -21,5 +19,12 @@ export default class TextComponent extends AbstractComponent {
     public set Height(value: number) {
         super.Height = value;
         super.Width = Math.ceil(this.text.length / value)        
+    }
+    public get Text() {
+        return this.text;
+    }
+    public set Text(value: string) {
+        this.text = value;
+        this.Width = this.Width;
     }
 }
