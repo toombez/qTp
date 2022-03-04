@@ -1,5 +1,5 @@
 import GroupComponent from "./GroupComponent";
-import { ExecuteControl } from "./types";
+import { ExecuteControl } from "../common/types";
 
 export default class ControlComponent extends GroupComponent {
     static activeComponent: ControlComponent;

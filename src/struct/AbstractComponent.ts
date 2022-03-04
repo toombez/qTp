@@ -1,4 +1,4 @@
-import { IncorrectComponentSizeError } from "./types";
+import { IncorrectComponentSizeError } from "../common/errors";
 
 export default abstract class AbstractComponent {
     constructor(
