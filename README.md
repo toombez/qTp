@@ -1,21 +1,21 @@
-# terminalGame
+# qTp
 
 ## Install
 
 ```bash
-$ npm install --global qtp
+$ npm install --global qtp-the-game
 ```
 
 
 ## CLI
 
 ```
-$ terminalGame --help
+$ qtp-the-game --help
     Usage
-        $ qtp
+        $ qtp-the-game
 
     Options
 
     Examples
-        $ qtp
+        $ qtp-the-game
 ```
