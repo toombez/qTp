@@ -5,13 +5,13 @@ import React from "react"
 import App from "./App.js"
 
 meow(`
-	Usage
-	  $ qtp
+    Usage
+        $ qtp
 
-	Options
+    Options
 
-	Examples
-	  $ qtp
+    Examples
+        $ qtp
 `,
   {
     flags: {},
