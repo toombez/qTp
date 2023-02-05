@@ -14,13 +14,8 @@ meow(`
         $ qtp
 `,
   {
-    flags: {},
-    importMeta: import.meta,
+    flags: {}
   }
 )
 
-const app = render(
-  <App/>
-)
-
-await app.waitUntilExit()
+const app = render(<App/>)

@@ -1,7 +1,7 @@
 import { Box, Text } from "ink"
-import React, { FC } from "react"
+import React from "react"
 
-const App: FC<{}> = () => {
+const App: React.FC<{}> = () => {
     return (
         <Box>
             <Text>
