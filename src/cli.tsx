@@ -18,4 +18,4 @@ meow(`
   }
 )
 
-render(<App />)
+const app = render(<App/>)
