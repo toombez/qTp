@@ -1,12 +1,17 @@
-import { Box, Text } from "ink"
 import React from "react"
+import { Box } from "ink"
+import MainMenu from './components/MainMenu'
+import { sizes, borders } from './constants'
 
 const App: React.FC<{}> = () => {
     return (
-        <Box>
-            <Text>
-                Lorem, ipsum.
-            </Text>
+        <Box
+            minWidth={ sizes.minWidth }
+            minHeight={ sizes.minHeight }
+            borderStyle={ borders.game.style }
+            borderColor={ borders.game.color }
+        >
+            <MainMenu />
         </Box>
     )
 }
