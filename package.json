@@ -10,11 +10,13 @@
   "dependencies": {
     "ink": "^3.2.0",
     "ink-big-text": "^1.2.0",
+    "ink-gradient": "^2.0.0",
     "meow": "^9.0.0",
     "react": "^18.2.0"
   },
   "devDependencies": {
     "@types/ink-big-text": "^1.2.1",
+    "@types/ink-gradient": "^2.0.1",
     "@types/node": "^18.11.19",
     "@types/react": "^18.0.27",
     "typescript": "^4.9.5"
