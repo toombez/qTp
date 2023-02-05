@@ -1,7 +1,7 @@
 import React from 'react'
 import BigText from 'ink-big-text'
 import Gradient from 'ink-gradient'
-import colors from '../theme/colors'
+import { colors } from '../theme'
 
 const Logo: React.FC = () => {
     return <Gradient

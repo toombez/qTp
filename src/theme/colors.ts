@@ -7,4 +7,3 @@ const colors = {
 } as const
 
 export default colors
-export { colors }
