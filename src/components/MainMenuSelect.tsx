@@ -1,8 +1,10 @@
-import { Text } from 'ink'
+import { Text, useApp } from 'ink'
 import SelectInput, { IndicatorProps, ItemProps } from 'ink-select-input'
 import React from 'react'
 
 import { colors } from '../theme'
+import { useNavigate } from 'react-router'
+import { Item } from 'ink-select-input/build/SelectInput'
 
 // type indicatorColors = typeof colors.white | typeof colors.green
 
@@ -22,17 +24,29 @@ const Item: React.FC<ItemProps> = ({ isSelected, label }) => {
 }
 
 const MainMenuSelect: React.FC = () => {
+    const navigate = useNavigate()
+    const app = useApp()
+
+    const onSelect = (item: Item<string>) => {
+        if (item.value === 'exit') {
+            app.exit()
+        }
+
+        navigate(item.value)
+    }
+    
     return <SelectInput
         items={[
-            { label: 'Новая игра', value: 0 },
-            { label: 'Загрузить игру', value: 1 },
-            { label: 'Настройки', value: 2 },
-            { label: 'Выйти', value: 3 },
+            { label: 'Новая игра', value: '/new' },
+            { label: 'Загрузить игру', value: '/load' },
+            { label: 'Настройки', value: '/settings' },
+            { label: 'Выйти', value: 'exit' },
         ]}
         indicatorComponent={ Indicator }
         itemComponent={ Item }
         initialIndex={ 0 }
         isFocused={ true }
+        onSelect={onSelect}
     />
 }
 
