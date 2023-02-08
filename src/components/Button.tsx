@@ -4,6 +4,7 @@ import { Box, BoxProps, useFocus, useInput } from "ink"
 interface IButtonProps extends BoxProps {
     children: React.ReactNode
     disabled?: boolean
+    focusedBox?: BoxProps
     onClick?: () => void
     onFocus?: () => void
     onBlur?: () => void
@@ -12,6 +13,7 @@ interface IButtonProps extends BoxProps {
 const Button: React.FC<IButtonProps> = ({
     children,
     disabled = false,
+    focusedBox,
     onClick,
     onFocus,
     onBlur,
@@ -27,7 +29,12 @@ const Button: React.FC<IButtonProps> = ({
             onBlur()
         }
     }, [isFocused])
+
     const canBeClicked = !disabled && isFocused
+
+    const _boxProps = focusedBox
+        ? (isFocused ? { ...boxProps, ...focusedBox } : boxProps)
+        : boxProps
 
     useInput((_, key) => {
         const enterPressed = key.return
@@ -38,7 +45,7 @@ const Button: React.FC<IButtonProps> = ({
         }
     }, { isActive: canBeClicked })
 
-    return <Box { ...boxProps } >
+    return <Box { ..._boxProps }>
         { children }
     </Box>
 }
