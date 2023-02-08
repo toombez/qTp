@@ -1,10 +1,11 @@
 import React, { useEffect } from "react"
 import { Box, BoxProps, useFocus, useInput } from "ink"
 
-interface IButtonProps extends BoxProps {
-    children: React.ReactNode
+interface IButtonProps {
+    children?: React.ReactNode
     disabled?: boolean
-    focusedBox?: BoxProps
+    boxProps?: BoxProps
+    focusedBoxProps?: BoxProps
     onClick?: () => void
     onFocus?: () => void
     onBlur?: () => void
@@ -13,11 +14,11 @@ interface IButtonProps extends BoxProps {
 const Button: React.FC<IButtonProps> = ({
     children,
     disabled = false,
-    focusedBox,
+    boxProps,
+    focusedBoxProps,
     onClick,
     onFocus,
     onBlur,
-    ...boxProps
 }) => {
     const { isFocused } = useFocus()
 
@@ -32,8 +33,10 @@ const Button: React.FC<IButtonProps> = ({
 
     const canBeClicked = !disabled && isFocused
 
-    const _boxProps = focusedBox
-        ? (isFocused ? { ...boxProps, ...focusedBox } : boxProps)
+    const _boxProps = focusedBoxProps
+        ? (isFocused
+            ? { ...boxProps, ...focusedBoxProps }
+            : boxProps)
         : boxProps
 
     useInput((_, key) => {
@@ -51,4 +54,4 @@ const Button: React.FC<IButtonProps> = ({
 }
 
 export default Button
-export { Button }
+export { Button, IButtonProps }
