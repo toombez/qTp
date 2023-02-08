@@ -1,80 +1,99 @@
-import { Box, BoxProps, Text, useFocus } from "ink"
+import { Box, BoxProps, Text, useFocus, useInput } from "ink"
 import React, { useEffect, useState } from "react"
 import theme from "../theme"
-import TextButton from "./TextButton"
+import HorizontalRule from "./HorizontalRule"
+
+interface IMapMarkerInfoButtonProps {
+    text: string
+    boxProps?: BoxProps
+    onPressed?: () => void
+}
+
+type MapMarkerInfoButtonPrefix = '>' | ' '
+type MapMarkerInfoButtonSuffix = '<' | ' '
+
+const MapMarkerInfoButton: React.FC<IMapMarkerInfoButtonProps> = ({
+    text,
+    boxProps,
+    onPressed,
+}) => {
+    const [prefix, setPrefix] = useState<MapMarkerInfoButtonPrefix>(' ')
+    const [suffix, setSuffix] = useState<MapMarkerInfoButtonSuffix>(' ')
+
+    function buttonInterval() {
+        const interval = setInterval(() => {
+            setPrefix((v) => v === '>' ? ' ' : '>')
+            setSuffix((v) => v === '<' ? ' ' : '<')
+        }, 1000)
+
+        return () => clearInterval(interval)
+    }
+
+    useInput((_, key) => {
+        const isEnterPressed = key.return
+
+        if (isEnterPressed && onPressed) {
+            onPressed()
+        }
+    })
+
+    useEffect(buttonInterval, [])
+
+    return <Box
+        { ...boxProps }
+        justifyContent="center"
+    >
+        <Text>
+            { prefix } { text } { suffix }
+        </Text>
+    </Box>
+}
 
 interface IMapMarkerInfoProps {
     name: string
     description: string
+    onButtonPressed?: () => void
 }
-
-interface IMapMarkerProps extends IMapMarkerInfoProps {
-    boxProps?: BoxProps,
-}
-
-type MapMarkerInfoSuffix = '<' | ' '
-type MapMarkerInfoPrefix = '>' | ' '
 
 const MapMarkerInfo: React.FC<IMapMarkerInfoProps> = ({
     description,
     name,
+    onButtonPressed,
 }) => {
     const WIDTH = 30
 
-    const [suffix, setSuffix] = useState<MapMarkerInfoSuffix>(' ')
-    const [prefix, setPrefix] = useState<MapMarkerInfoPrefix>(' ')
-    const [isUnderlined, setIsUnderlined] = useState(false)
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setSuffix((v) => v === '<' ? ' ' : '<')
-            setPrefix((v) => v === '>' ? ' ' : '>')
-            setIsUnderlined(v => !v)
-        }, 1000)
-
-        return () => clearInterval(interval)
-    }, [])
-
     return <Box
-        width={WIDTH}
+        width={ WIDTH }
+        marginLeft={ 2 }
+        marginTop={ -2 }
+        position="absolute"
         flexDirection='column'
         borderStyle="round"
-        position="absolute"
-        marginLeft={1}
     >
-        <Box
-        >
-            <Text color={theme.colors.yellow}>
-                *{ name }
-            </Text>
+        <Text color={theme.colors.yellow}>
+            *{ name }
+        </Text>
+        <HorizontalRule width={ WIDTH } />
+        <Box paddingLeft={ 1 }>
+            <Text>{ description }</Text>
         </Box>
-        <Box>
-            <Text>{new Array(WIDTH - 2).fill('-').join('')}</Text>
-        </Box>
-        <Box
-            paddingLeft={1}
-        >
-            <Text>
-                { description }
-            </Text>
-        </Box>
-        <Box
-            borderStyle="double"
-            justifyContent="center"
-            marginTop={1}
-            marginLeft={1}
-            marginRight={1}
-        >
-            <Text underline={isUnderlined}>
-                {' '}{prefix} посетить { suffix }{' '}
-            </Text>
-        </Box>
+
+        <MapMarkerInfoButton
+            text="отправиться"
+            onPressed={ onButtonPressed }
+            boxProps={{ marginTop: 1 }}
+        />
     </Box>
 }
 
+interface IMapMarkerProps extends Omit<IMapMarkerInfoProps, 'onButtonPressed'> {
+    boxProps?: BoxProps
+    onSelect?: () => void
+}
 
 const MapMarker: React.FC<IMapMarkerProps> = ({
     boxProps,
+    onSelect,
     ...infoProps
 }) => {
     const { isFocused } = useFocus()
@@ -82,13 +101,14 @@ const MapMarker: React.FC<IMapMarkerProps> = ({
     return <Box
         { ...boxProps }
     >
-        <Text>x</Text>
+        <Text>{ isFocused ? 'x' : 'o' }</Text>
         { isFocused &&
             <Box>
-                <Text>-</Text>
-                <MapMarkerInfo {
-                    ...infoProps
-                } />
+                <Text> &#60;</Text>
+                <MapMarkerInfo
+                    onButtonPressed={onSelect}
+                    { ...infoProps }
+                />
             </Box>
         }
     </Box>
