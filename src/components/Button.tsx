@@ -1,5 +1,6 @@
 import React, { useEffect } from "react"
 import { Box, BoxProps, useFocus, useInput } from "ink"
+import useStyledFocus from "../hooks/useStyledFocus"
 
 interface IButtonProps {
     children?: React.ReactNode
@@ -20,7 +21,10 @@ const Button: React.FC<IButtonProps> = ({
     onFocus,
     onBlur,
 }) => {
-    const { isFocused } = useFocus()
+    const { isFocused, styles: _boxProps } = useStyledFocus({
+        defaultStyles: boxProps,
+        focusedStyles: focusedBoxProps
+    })
 
     useEffect(() => {
         if (isFocused && onFocus) {
@@ -32,12 +36,6 @@ const Button: React.FC<IButtonProps> = ({
     }, [isFocused])
 
     const canBeClicked = !disabled && isFocused
-
-    const _boxProps = focusedBoxProps
-        ? (isFocused
-            ? { ...boxProps, ...focusedBoxProps }
-            : boxProps)
-        : boxProps
 
     useInput((_, key) => {
         const enterPressed = key.return
