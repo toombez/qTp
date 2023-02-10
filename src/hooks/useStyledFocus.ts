@@ -1,24 +1,24 @@
-import { TextProps, useFocus } from "ink"
+import { useFocus } from "ink"
 
-type useFocusArguments = Parameters<typeof useFocus>[0]
+type useFocusProps = Parameters<typeof useFocus>[0]
 
 type UseFocusStyles<T> = {
     defaultStyles?: T
     focusedStyles?: T
-} & useFocusArguments
+} & useFocusProps
 
 const useStyledFocus = <T>({
-    defaultStyles: defaultStylesArg,
-    focusedStyles: focusedStylesArg,
-    ...useFocusArgs
-}: UseFocusStyles<T>) => {
-    const { focus, isFocused } = useFocus(useFocusArgs)
+    defaultStyles: defaultStylesProp,
+    focusedStyles: focusedStylesProp,
+    ...useFocusProps
+}: UseFocusStyles<T> = {}) => {
+    const { focus, isFocused } = useFocus(useFocusProps)
 
-    const styles = focusedStylesArg
+    const styles = focusedStylesProp
         ? (isFocused
-            ? { ...defaultStylesArg, ...focusedStylesArg }
-            : defaultStylesArg)
-        : defaultStylesArg
+            ? { ...defaultStylesProp, ...focusedStylesProp }
+            : defaultStylesProp)
+        : defaultStylesProp
 
     return {
         styles,
