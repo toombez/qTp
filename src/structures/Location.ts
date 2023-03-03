@@ -7,17 +7,9 @@ interface LocationRaw {
 }
 
 export abstract class Location {
-    public readonly name: string
-    public readonly type: LocationType
-    public readonly description: string
-
-    constructor({
-        name,
-        type,
-        description,
-    }: LocationRaw) {
-        this.name = name
-        this.type = type
-        this.description = description
-    }
+    constructor(
+        public readonly name: string,
+        public readonly type: LocationType,
+        public readonly description: string,
+    ) {}
 }
