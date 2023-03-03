@@ -15,7 +15,7 @@
     "meow": "^9.0.0",
     "react": "^18.2.0",
     "react-router": "^6.8.1",
-    "zustand": "^4.3.2"
+    "zustand": "^4.3.5"
   },
   "devDependencies": {
     "@types/ink-big-text": "^1.2.1",
