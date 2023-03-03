@@ -16,20 +16,6 @@ export default class Pool<T> {
         return this.items.length === 0
     }
 
-    /**
-     * Last pool item
-     */
-    public get last() {
-        return this.items[this.items.length - 1]
-    }
-
-    /**
-     * First pool item
-     */
-    public get first() {
-        return this.items[0]
-    }
-
     constructor(
         private items: T[]
     ) {}
@@ -45,9 +31,12 @@ export default class Pool<T> {
     /**
      * Delete item from pool
      * @param targetItem item to delete
+     * @returns deleted item
      */
     public delete(targetItem: T) {
         this.items = this.items.filter(item => item !== targetItem)
+
+        return targetItem
     }
 
     /**
@@ -65,12 +54,22 @@ export default class Pool<T> {
     }
 
     /**
-     * Pick one item from pool
-     * @returns random item from pool
+     * Pick items from pool and deletes it from pool
+     * @param count count to pick
+     * @returns random item in array from pool
      */
-    public pick() {
-        const index = this.getRandomIndex()
-        return this.items[index]
+    public pick(count: number = 1) {
+        const picked = []
+
+        for (let i = 0; i < count; i++) {
+            const index = this.getRandomIndex()
+            const item = this.items[index]
+
+            picked.push(item)
+            this.delete(item)
+        }
+
+        return picked
     }
 
     /**
