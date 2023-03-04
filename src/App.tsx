@@ -1,6 +1,6 @@
 import React from "react"
 import { Box, Text } from "ink"
-import MainMenu from './components/MainMenu'
+import MainMenu from './routes/MainMenu'
 import { sizes, borders } from './constants'
 import { MemoryRouter, Route, Routes } from 'react-router'
 import Settings from "./routes/Settings"
