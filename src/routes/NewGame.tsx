@@ -1,36 +1,42 @@
-import { Box } from 'ink'
-import React from 'react'
+import { Box, Text } from 'ink'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router'
-import Map from '../components/Map'
-import MapMarker from '../components/MapMarker'
+
+import TextInput from 'ink-text-input'
+
+const PROFILE_LENGTH = 3
 
 const NewGame: React.FC = () => {
     const navigate = useNavigate()
+	const [saveProfileName, setSaveProfileName] = useState('');
 
-    return <Box>
-        <Map>
-            <MapMarker
-                name='first'
-                description='Lorem ipsum dolor sit amet consectetur.'
-                boxProps={{
-                    position: 'absolute',
-                    marginLeft: 30,
-                    marginTop: 2,
-                }}
+    function onChangeHandle(value: string) {
+        if (value.length > PROFILE_LENGTH) {
+            return
+        }
+
+        setSaveProfileName(value)
+    }
+
+    async function onSubmitHandler() {
+        navigate('/')
+    }
+
+    return <Box
+        justifyContent='center'
+        alignItems='center'
+        width='100%'
+    >
+        <Box width={40} borderStyle='bold' padding={1}>
+            <Text>Profile name: </Text>
+            <TextInput
+                value={saveProfileName}
+                onChange={onChangeHandle}
+                placeholder={`${PROFILE_LENGTH} symbols max`}
+                showCursor={true}
+                onSubmit={onSubmitHandler}
             />
-            <MapMarker
-                name='second'
-                description='Lorem ipsum dolor sit amet consectetur.'
-                boxProps={{
-                    position: 'absolute',
-                    marginLeft: 50,
-                    marginTop: 5,
-                }}
-                onSelect={() => {
-                    navigate('/')
-                }}
-            />
-        </Map>
+        </Box>
     </Box>
 }
 
