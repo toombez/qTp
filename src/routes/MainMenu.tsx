@@ -1,10 +1,8 @@
 import React from 'react'
 import { Box, Text } from 'ink'
-import Logo from './Logo'
+import Logo from '../components/Logo'
 import SelectInput from 'ink-select-input'
-import MainMenuSelect from './MainMenuSelect'
-
-
+import MainMenuSelect from '../components/MainMenuSelect'
 
 const MainMenu: React.FC = () => {
     return <Box
