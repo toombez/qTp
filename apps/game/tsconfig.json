@@ -1,0 +1,10 @@
+{
+  "extends": "@qtp/tsconfig/base.json",
+  "compilerOptions": {
+    "typeRoots": ["../../node_modules/@types"],
+    "outDir": "dist"
+  },
+  "include": [
+    "src"
+  ]
+}

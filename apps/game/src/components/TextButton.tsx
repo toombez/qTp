@@ -50,4 +50,5 @@ const TextButton: React.FC<ITextButtonProps> = ({
 }
 
 export default TextButton
-export { TextButton, ITextButtonProps }
+export { TextButton }
+export type { ITextButtonProps }
